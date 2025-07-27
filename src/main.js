@@ -20,7 +20,7 @@ let totalHits = 0;
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  currentQuery = e.target.elements.searchQuery.value.trim();
+  currentQuery = e.target.elements['search-text'].value.trim();
   currentPage = 1;
   totalImagesLoaded = 0;
   clearGallery();
