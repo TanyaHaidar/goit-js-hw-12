@@ -79,12 +79,15 @@ body {
 }
 
 .loader {
+  display: block;
   text-align: center;
-  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  margin: 20px auto;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .load-more {

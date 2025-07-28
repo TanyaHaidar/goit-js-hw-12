@@ -36,16 +36,18 @@ form.addEventListener('submit', async e => {
 
     if (data.hits.length === 0) {
       iziToast.info({ message: 'No images found.' });
-      hideLoader();
       return;
     }
 
     createGallery(data.hits);
     totalImagesLoaded += data.hits.length;
 
-    if (totalImagesLoaded < totalHits) showLoadMoreButton();
-    else
+    if (data.hits.length === 15 && totalImagesLoaded < totalHits) {
+      showLoadMoreButton();
+    } else {
+      hideLoadMoreButton();
       iziToast.info({ message: "You've reached the end of search results." });
+    }
   } catch (error) {
     iziToast.error({ message: 'Error fetching data.' });
   } finally {
@@ -68,11 +70,11 @@ loadMoreButton.addEventListener('click', async () => {
       .firstElementChild.getBoundingClientRect();
     window.scrollBy({ top: cardHeight * 2, behavior: 'smooth' });
 
-    if (totalImagesLoaded >= totalHits) {
+    if (data.hits.length === 15 && totalImagesLoaded < totalHits) {
+      showLoadMoreButton();
+    } else {
       hideLoadMoreButton();
       iziToast.info({ message: "You've reached the end of search results." });
-    } else {
-      showLoadMoreButton();
     }
   } catch (error) {
     iziToast.error({ message: 'Failed to load more images.' });
